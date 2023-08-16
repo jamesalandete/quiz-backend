@@ -36,4 +36,5 @@ Route::group(['prefix' => 'private', 'middleware' => 'auth:sanctum'], function (
     Route::apiResource('answers', AnswerController::class);
     Route::apiResource('user-answers', UserAnswerController::class);
     Route::post('user-answers/score', [UserAnswerController::class, 'score']);
+    Route::get('user-answers/user-score/{user_id}', [UserAnswerController::class, 'scoreUser']);
 });
