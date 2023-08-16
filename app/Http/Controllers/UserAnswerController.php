@@ -71,8 +71,21 @@ class UserAnswerController extends BaseController
     public function scoreUser($user_id)
     {
         try {
-        $item = UserScore::where('user_id', $user_id);
-        return response()->json($item);
+        $item = UserScore::where('user_id', $user_id)->first();
+
+        if (!$item) {
+            return response()->json([]);
+        }
+
+        $userAnswers = UserAnswer::where('user_id', $user_id)->get();
+        $answerList = Answer::select('id', 'question_id', 'answer_text', 'correct')->where('correct', true)->get();
+        $totalAnswersCount = count($answerList);
+        $score = [
+            'score' => $item->score,
+            'user' => $totalAnswersCount,
+            'answerCorrect' => $answerList
+        ];
+        return response()->json(['score' => $score, 'UserAnswwer' => [$userAnswers], 'answerCorrect' => $answerList]);
         } catch (\Exception $e) {
         return $this->respondError($e->getMessage());
         }
