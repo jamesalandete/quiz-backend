@@ -1,0 +1,19 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "migration-table": "php artisan make:migration name-table",
+        "migration-database": "php artisan migrate",
+        "make:controller": "php artisan make:controller name-controller",
+        "make:seeder": "php artisan make:seeder name-seeder",
+        "db:seed-name": "php artisan db:seed --class=name-seeder",
+        "db:seed-all": "php artisan db:seed"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.5",
+        "vite": "^4.0.0"
+    }
+}
